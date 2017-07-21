@@ -1,5 +1,5 @@
 {
-  "name": "ice-modal",
+  "name": "@addepar/ice-modal",
   "version": "0.0.0",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
