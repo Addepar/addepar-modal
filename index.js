@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: '@addepar/ice-modal'
+  name: '@addepar/modal'
 };
