@@ -1,6 +1,8 @@
-# ice-modal
+[![Build Status](https://travis-ci.org/Addepar/addepar-modal.svg?branch=master)](https://travis-ci.org/Addepar/addepar-modal)
 
-This README outlines the details of collaborating on this Ember addon.
+# addepar-modal
+
+An Ember-CLI addon for a modal component using ember-wormhole compatibile with Ember 1.12.
 
 ## Installation
 
