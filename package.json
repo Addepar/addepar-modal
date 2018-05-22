@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@addepar/ember-toolbox": "^0.2.0",
+    "@ember-decorators/argument": "^0.8.15",
     "@ember-decorators/babel-transforms": "^2.0.1",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
