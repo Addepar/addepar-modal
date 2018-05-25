@@ -1,6 +1,13 @@
-{{#adde-modal
-  translucentOverlay=true
-  headerText='Test header'
-}}
-  Test content!
-{{/adde-modal}}
+{{#if isShowingModal}}
+  {{#adde-modal
+    close='hideModal'
+    confirm='hideModal'
+    headerText='Test header'
+  }}
+    This is a sample modal!
+  {{/adde-modal}}
+{{/if}}
+
+<button {{action 'showModal'}}>
+  Show modal
+</button>

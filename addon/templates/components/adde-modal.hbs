@@ -9,9 +9,11 @@
           target=target
       }}
         <div class='adde-modal-header'>
-          <button class='button-icon adde-modal-close'>
-            &times;
-          </button>
+          {{#if hasCloseButton}}
+            <button class='button-icon adde-modal-close' {{action 'close'}}>
+              &times;
+            </button>
+          {{/if}}
           <h4 class='adde-modal-title'>{{headerText}}</h4>
         </div>
 

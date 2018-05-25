@@ -3,13 +3,10 @@ import ModalDialog from 'ember-modal-dialog/components/modal-dialog';
 import layout from '../templates/components/adde-modal';
 
 import { argument } from '@ember-decorators/argument';
-import { computed } from '@ember-decorators/object';
+import { action, computed } from '@ember-decorators/object';
 
 export default class AddeModal extends ModalDialog {
   layout = layout;
-
-  @argument
-  targetAttachment = 'center';
 
   @argument
   confirmText = 'Confirm';
@@ -23,6 +20,12 @@ export default class AddeModal extends ModalDialog {
   @argument
   size = 'normal';
 
+  @argument
+  hasCloseButton = true;
+
+  @argument
+  translucentOverlay = true;
+
   @computed('size')
   get sizeClass() {
     let size = this.get('size');
@@ -32,6 +35,15 @@ export default class AddeModal extends ModalDialog {
       return 'size-sm';
     } else {
       return '';
+    }
+  }
+
+  @action
+  confirm() {
+    if (this.get('confirm')) {
+      this.sendAction('confirm');
+    } else {
+      this.sendAction('close');
     }
   }
 }
