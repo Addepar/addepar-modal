@@ -1,8 +1,56 @@
+@import '@addepar/style-toolbox/core-variables/spacing';
+@import '@addepar/style-toolbox/core-variables/colors';
+@import '@addepar/style-toolbox/core-variables/typography';
+
+// Base modal
 .ember-modal-dialog {
   border-radius: 2px;
   background-color: #fff;
-  padding: 10px;
+  width: 600px;
+
+  &.size-sm {
+    width: 400px;
+  }
+
+  &.size-lg {
+    width: 800px;
+  }
 }
+
+// Overlay
 .ember-modal-overlay.translucent {
   background-color: rgba(#808080, .77);
+}
+
+// Header
+.adde-modal-header {
+  background-color: $background-dark;
+  color: $text-white;
+
+  h4.adde-modal-title {
+    margin: 0;
+    padding: 20px;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: $font-normal;
+  }
+
+  button.adde-modal-close {
+    float: right;
+    border: 0;
+    height: 58px;
+    width: 58px;
+    color: $text-white;
+    border-radius: 0;
+
+    &:hover {
+      background-color: #4d4d4d;
+    }
+  }
+}
+
+// Footer
+.adde-modal-footer {
+  padding: $spacing-double;
+  border-top: 1px solid $hr-line;
 }

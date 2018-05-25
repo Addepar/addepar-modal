@@ -1,4 +1,38 @@
-{{yield}}
-{{!-- {{#modal-dialog}}
-  TEST2
-{{/modal-dialog}} --}}
+{{#ember-wormhole to=destinationElementId renderInPlace=renderInPlace}}
+  <div class='{{wrapperClassNamesString}} {{wrapper-class}}'>
+    {{#modal-dialog-overlay
+        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
+        action='clickedOverlay'
+    }}
+      {{#ember-modal-dialog-positioned-container classNameBindings='containerClassNamesString targetAttachmentClass container-class sizeClass'
+          targetAttachment=targetAttachment
+          target=target
+      }}
+        <div class='adde-modal-header'>
+          <button class='button-icon adde-modal-close'>
+            &times;
+          </button>
+          <h4 class='adde-modal-title'>{{headerText}}</h4>
+        </div>
+
+        <div class='adde-modal-body'>
+          {{yield}}
+        </div>
+
+        <div class='adde-modal-footer'>
+          {{#if confirmText}}
+            <button class='button-primary' {{action 'confirm'}}>
+              {{confirmText}}
+            </button>
+          {{/if}}
+
+          {{#if closeText}}
+            <button class='button-default' {{action 'close'}}>
+              {{closeText}}
+            </button>
+          {{/if}}
+        </div>
+      {{/ember-modal-dialog-positioned-container}}
+    {{/modal-dialog-overlay}}
+  </div>
+{{/ember-wormhole}}
