@@ -1,3 +1,11 @@
+// ember-dialog-modal
+@import 'ember-modal-dialog/ember-modal-structure';
+
+// adde-modal specific
+@import 'adde-modal/adde-modal.scss';
+
+// addepar-style-toolbox
+@import '@addepar/style-toolbox';
 @import '@addepar/style-toolbox/core-variables/spacing';
 @import '@addepar/style-toolbox/core-variables/colors';
 @import '@addepar/style-toolbox/core-variables/typography';
@@ -32,6 +40,7 @@
 .adde-modal-header {
   background-color: $background-dark;
   color: $text-white;
+  height: 58px;
 
   h4.adde-modal-title {
     margin: 0;
