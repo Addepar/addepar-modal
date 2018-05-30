@@ -1,3 +1,3 @@
 module.exports = {
-  extends: '@addepar'
+  extends: ['@addepar', '@addepar/eslint-config/ember']
 };

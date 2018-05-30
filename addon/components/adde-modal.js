@@ -8,23 +8,17 @@ import { action, computed } from '@ember-decorators/object';
 export default class AddeModal extends ModalDialog {
   layout = layout;
 
-  @argument
-  confirmText = 'Confirm';
+  @argument confirmText = 'Confirm';
 
-  @argument
-  closeText = 'Cancel';
+  @argument closeText = 'Cancel';
 
-  @argument
-  headerText = '';
+  @argument headerText = '';
 
-  @argument
-  size = 'normal';
+  @argument size = 'normal';
 
-  @argument
-  hasCloseButton = true;
+  @argument hasCloseButton = true;
 
-  @argument
-  translucentOverlay = true;
+  @argument translucentOverlay = true;
 
   @computed('size')
   get sizeClass() {
