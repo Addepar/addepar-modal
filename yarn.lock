@@ -33,6 +33,10 @@
     eslint-plugin-import "^2.3.0"
     eslint-plugin-prefer-let "^1.0.1"
 
+"@addepar/prettier-config@^1.0.0":
+  version "1.0.0"
+  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/prettier-config/-/prettier-config-1.0.0.tgz?dl=https://registry.yarnpkg.com/@addepar/prettier-config/-/prettier-config-1.0.0.tgz#b3d85d2059e3ded49f91f6a120678c4da2c8d300"
+
 "@addepar/sass-lint-config@^2.0.0":
   version "2.0.1"
   resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/sass-lint-config/-/sass-lint-config-2.0.1.tgz?dl=https://registry.yarnpkg.com/@addepar/sass-lint-config/-/sass-lint-config-2.0.1.tgz#b9782ffd6b9c5d267cbc54acb32e5254ca789a12"
