@@ -20,6 +20,6 @@ module.exports = {
         '--remote-debugging-port=9222',
         '--window-size=1440,900'
       ]
-    },
+    }
   }
 };
