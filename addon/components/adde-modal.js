@@ -2,11 +2,10 @@ import ModalDialog from 'ember-modal-dialog/components/modal-dialog';
 import { assert } from '@ember/debug';
 import { guidFor } from '@ember/object/internals';
 
-
 import layout from '../templates/components/adde-modal';
 
 import { argument } from '@ember-decorators/argument';
-import { type, unionOf } from '@ember-decorators/argument/type';
+import { type } from '@ember-decorators/argument/type';
 import { action, computed } from '@ember-decorators/object';
 import { immutable } from '@ember-decorators/argument/validation';
 
@@ -19,7 +18,8 @@ export default class AddeModal extends ModalDialog {
    * Header text for the modal.
    */
   @type('string')
-  @argument headerText = '';
+  @argument
+  headerText = '';
 
   /**
    * Size of the modal. Can be either 'large', 'small', or 'normal'. Used to generate the
@@ -27,51 +27,58 @@ export default class AddeModal extends ModalDialog {
    * @see {sizeClass}
    */
   @type('string')
-  @argument size = 'normal';
+  @argument
+  size = 'normal';
 
   /**
    * Whether to show the close button in the top right of the modal (inside the header).
    */
   @type('boolean')
-  @argument showCloseButton = true;
+  @argument
+  showCloseButton = true;
 
   /**
    * Whether to show the translucent overlay over content behind the modal.
    */
   @type('boolean')
-  @argument translucentOverlay = true;
+  @argument
+  translucentOverlay = true;
 
   /**
    * Whether clicking the overlay should send the 'onClose' action.
    */
   @type('boolean')
-  @argument clickOutsideToClose = true;
+  @argument
+  clickOutsideToClose = true;
 
   /**
    * Whether pressing the 'Escape' key will send the 'onClose' action.
    */
   @type('boolean')
-  @argument closeOnEscape = true;
+  @argument
+  closeOnEscape = true;
 
   /**
    * Whether to show the footer, which contains the 'Confirm' and 'Cancel' buttons (if used).
    */
   @type('boolean')
-  @argument showFooter = true;
+  @argument
+  showFooter = true;
   /**
    * Button text for the primary ('Confirm') button in the footer. The 'Confirm' button is not shown
    * if this property is null.
    */
   @type('string')
-  @argument confirmText = 'Confirm';
+  @argument
+  confirmText = 'Confirm';
 
   /**
    * Button text for the primary ('Cancel') button in the footer. The 'Cancel' button is not shown
    * if this property is null.
    */
   @type('string')
-  @argument cancelText = 'Cancel';
-
+  @argument
+  cancelText = 'Cancel';
 
   /**
    * Selector for the root element of the application which will have body listeners
@@ -82,16 +89,13 @@ export default class AddeModal extends ModalDialog {
   @type('string')
   rootElementSelector = '.ember-application';
 
-
   // ----- Private Variables -----
 
   _rootElement = null;
 
-  @type('string')
-  _modalElementSelector = '.adde-modal';
+  @type('string') _modalElementSelector = '.adde-modal';
 
-  @type('string')
-  _modalTitleSelector = '.adde-modal-title';
+  @type('string') _modalTitleSelector = '.adde-modal-title';
 
   _modalElement = null;
 
@@ -114,24 +118,25 @@ export default class AddeModal extends ModalDialog {
     }
   }
 
-
   // ----- Lifecycle Hooks -----
 
   didInsertElement() {
     this._super(...arguments);
-    
+
     // Setup event listeners for keyboard support
     let rootElementSelector = this.get('rootElementSelector');
     let possibleRootElements = self.document.querySelectorAll(rootElementSelector);
-    
+
     assert(
-      `Using root element selector "${rootElementSelector}" found ${possibleRootElements.length} possible containers when there should be exactly 1`,
+      `Using root element selector "${rootElementSelector}" found ${
+        possibleRootElements.length
+      } possible containers when there should be exactly 1`,
       possibleRootElements.length === 1
     );
-    
+
     this._rootElement = possibleRootElements[0];
     this._rootElement.addEventListener('keydown', this._closeModalHandler);
-    
+
     // Setup accessibility attributes
     let modalElementSelector = this.get('_modalElementSelector');
     this._modalElement = this._rootElement.querySelector(modalElementSelector);
@@ -140,7 +145,7 @@ export default class AddeModal extends ModalDialog {
 
     let titleID = `${guidFor(this)}-modal-title`;
     this._modalTitleElement.setAttribute('id', titleID);
-    
+
     this._modalElement.setAttribute('role', 'dialog');
     this._modalElement.setAttribute('aria-modal', 'true');
     this._modalElement.setAttribute('aria-labelledby', titleID);
@@ -153,15 +158,15 @@ export default class AddeModal extends ModalDialog {
     this._rootElement.removeEventListener('keydown', this._closeModalHandler);
   }
 
-
   // ----- Private Functions -----
-  
+
   /**
    * Returns a node list of all focusable elements in the modal
    * @returns {NodeList}
    */
   _getFocusableElementsInPopper() {
-    let focusableSelectors = 'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
+    let focusableSelectors =
+      'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
     let focusableElements = this._modalElement.querySelectorAll(focusableSelectors);
     return focusableElements;
   }
@@ -172,13 +177,16 @@ export default class AddeModal extends ModalDialog {
    */
   _setInitialFocus() {
     let focusableElements = this._getFocusableElementsInPopper();
-    
+
     // If the modal has no focusable elements, no need to do anything
     if (focusableElements.length === 0) {
       return;
     }
 
-    let confirmButton = this._findElementInNodeListWithClass(focusableElements, 'adde-modal-confirm');
+    let confirmButton = this._findElementInNodeListWithClass(
+      focusableElements,
+      'adde-modal-confirm'
+    );
     if (confirmButton) {
       confirmButton.focus();
       return;
@@ -189,7 +197,7 @@ export default class AddeModal extends ModalDialog {
       cancelButton.focus();
       return;
     }
-    
+
     let closeButton = this._findElementInNodeListWithClass(focusableElements, 'adde-modal-close');
     if (closeButton) {
       closeButton.focus();
@@ -203,11 +211,10 @@ export default class AddeModal extends ModalDialog {
     return Array.from(nodeList).find(el => Array.from(el.classList).includes(className));
   }
 
-
   // ----- Actions -----
 
   /**
-   * Action handler for when the 'Confirm' button is clicked. If there is no action defined for 
+   * Action handler for when the 'Confirm' button is clicked. If there is no action defined for
    * 'onConfirm', it will defer to the 'onClose' action.
    */
   @action
@@ -220,7 +227,7 @@ export default class AddeModal extends ModalDialog {
   }
 
   /**
-   * Action handler for when the 'Cancel' button is clicked. If there is no action defined for 
+   * Action handler for when the 'Cancel' button is clicked. If there is no action defined for
    * 'onCancel', it will defer to the 'onClose' action.
    */
   @action
@@ -260,18 +267,17 @@ export default class AddeModal extends ModalDialog {
     }
   }
 
-
   // ----- Event Handlers -----
-  
+
   _closeModalHandler = event => {
     if (!this.get('closeOnEscape')) {
       return;
     }
-    
+
     let keyCode = event.key;
 
     if (keyCode === 'Escape') {
       this.send('onClose');
     }
-  }
+  };
 }
