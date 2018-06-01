@@ -1,8 +1,8 @@
 {{#if isShowingModal}}
   {{#adde-modal
-    close='hideModal'
-    confirm='hideModal'
+    onClose='hideModal'
     headerText='Test header'
+    clickOutsideToClose=false
   }}
     This is a sample modal!
   {{/adde-modal}}

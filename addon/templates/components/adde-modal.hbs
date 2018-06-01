@@ -2,15 +2,17 @@
   <div class='{{wrapperClassNamesString}} {{wrapper-class}}'>
     {{#modal-dialog-overlay
         classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
-        action='clickedOverlay'
+        action='onClickOverlay'
     }}
-      {{#ember-modal-dialog-positioned-container classNameBindings='containerClassNamesString targetAttachmentClass container-class sizeClass'
-          targetAttachment=targetAttachment
-          target=target
+      {{#ember-modal-dialog-positioned-container 
+        classNameBindings='containerClassNamesString targetAttachmentClass container-class sizeClass'
+        classNames='adde-modal'
+        targetAttachment=targetAttachment
+        target=target
       }}
         <div class='adde-modal-header'>
-          {{#if hasCloseButton}}
-            <button class='button-icon adde-modal-close' {{action 'close'}}>
+          {{#if showCloseButton}}
+            <button tabIndex=0 class='button-icon adde-modal-close' {{action 'onClose'}}>
               &times;
             </button>
           {{/if}}
@@ -21,19 +23,21 @@
           {{yield}}
         </div>
 
-        <div class='adde-modal-footer'>
-          {{#if confirmText}}
-            <button class='button-primary' {{action 'confirm'}}>
-              {{confirmText}}
-            </button>
-          {{/if}}
+        {{#if showFooter}}
+          <div class='adde-modal-footer'>
+            {{#if confirmText}}
+              <button tabIndex=0 class='button-primary adde-modal-confirm' {{action 'onConfirm'}}>
+                {{confirmText}}
+              </button>
+            {{/if}}
 
-          {{#if closeText}}
-            <button class='button-default' {{action 'close'}}>
-              {{closeText}}
-            </button>
-          {{/if}}
-        </div>
+            {{#if cancelText}}
+              <button tabIndex=0 class='button-default adde-modal-cancel' {{action 'onCancel'}}>
+                {{cancelText}}
+              </button>
+            {{/if}}
+          </div>
+        {{/if}}
       {{/ember-modal-dialog-positioned-container}}
     {{/modal-dialog-overlay}}
   </div>
