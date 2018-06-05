@@ -1,32 +1,18 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent(
-  'adde-modal/adde-modal-header',
-  'Integration | Component | adde modal/adde modal header',
-  {
-    integration: true,
-  }
-);
+moduleForComponent('adde-modal-header', 'Integration | Component | adde-modal-header', {
+  integration: true,
+});
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{adde-modal/adde-modal-header}}`);
-
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    ''
-  );
+test('adde-modal-header renders', function(assert) {
+  assert.expect(1);
 
   // Template block usage:
   this.render(hbs`
-    {{#adde-modal/adde-modal-header}}
+    {{#adde-modal-header}}
       template block text
-    {{/adde-modal/adde-modal-header}}
+    {{/adde-modal-header}}
   `);
 
   assert.equal(

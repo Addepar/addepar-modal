@@ -1,32 +1,18 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent(
-  'adde-modal/adde-modal-footer',
-  'Integration | Component | adde modal/adde modal footer',
-  {
-    integration: true,
-  }
-);
+moduleForComponent('adde-modal-footer', 'Integration | Component | adde-modal-footer', {
+  integration: true,
+});
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{adde-modal/adde-modal-footer}}`);
-
-  assert.equal(
-    this.$()
-      .text()
-      .trim(),
-    ''
-  );
+test('adde-modal-footer renders', function(assert) {
+  assert.expect(1);
 
   // Template block usage:
   this.render(hbs`
-    {{#adde-modal/adde-modal-footer}}
+    {{#adde-modal-footer}}
       template block text
-    {{/adde-modal/adde-modal-footer}}
+    {{/adde-modal-footer}}
   `);
 
   assert.equal(
