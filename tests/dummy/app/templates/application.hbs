@@ -1,21 +1,30 @@
-{{#if isShowingModal}}
-  {{#adde-modal
-    headerText='Test'
-    size='large'
-    onClose='hideModal'
-  }}
-    TEST
-  {{/adde-modal}}
-{{/if}}
+<section>
+  <h3>Sample base \{{adde-modal}}</h3>  
+  {{#if isShowingModal}}
+    {{#adde-modal
+      headerText='Test'
+      size='large'
+      onClose='hideModal'
+      onCancel='hideModal'
+      onClickOverlay='hideModal'
+      containerClassNames='container'
+      overlayClassNames='overlay'
+      wrapperClassNames='wrapper'
+    }}
+      TEST
+    {{/adde-modal}}
+  {{/if}}
+  <button {{action 'showModal'}}>
+    Click me
+  </button>
+</section>
 
-Using built in stuff:
-<button {{action 'showModal'}}>
-  Show modal
-</button>
 
 
 {{#if isShowingOtherModal}}
-  {{#adde-modal-container}}
+  {{#adde-modal-container
+    onClose='hideOtherModal'
+  }}
     {{#adde-modal-header}}
       WHAT IS UP
     {{/adde-modal-header}}

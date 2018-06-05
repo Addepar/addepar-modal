@@ -12,7 +12,7 @@ import { action } from '@ember-decorators/object';
 export default class AddeModal extends Component {
   layout = layout;
 
-  // ----- Arguments: adde-modal-container overrides -----
+  // ----- Arguments: passed into adde-modal-container -----
 
   /**
    * Size of the modal. Can be either 'large', 'small', or 'normal'. Used to generate the
@@ -31,12 +31,15 @@ export default class AddeModal extends Component {
   translucentOverlay = true;
 
   /**
-   * Whether clicking the overlay should send the 'onClose' action.
+   * Whether clicking the overlay should send the `onClose` action.
    */
   @type('boolean')
   @argument
-  clickOutsideToClose = true;
+  clickOverlayToClose = true;
 
+  /**
+   * Action sent upon clicking the overlay; only sent if `clickOverlayToClose` is true
+   */
   @type(unionOf(null, 'string'))
   @argument
   onClickOverlay = null;
@@ -46,14 +49,17 @@ export default class AddeModal extends Component {
    */
   @type('boolean')
   @argument
-  closeOnEscape = true;
+  escapeToClose = true;
 
   /**
-   * Whether to show the close button in the top right of the modal (inside the header).
+   * Selector string for the element that should be focused upon modal instantiation. If not
+   * specified, it will try to focus 'Confirm' button, then 'Cancel' button, then the first
+   * focusable element, in that order.
    */
-  @type('boolean')
+  @type(unionOf(null, 'string'))
+  @immutable
   @argument
-  showCloseButton = true;
+  initialFocusClass = null;
 
   /**
    * Selector for the root element of the application which will have body listeners
@@ -64,6 +70,42 @@ export default class AddeModal extends Component {
   @type('string')
   rootElementSelector = '.ember-application';
 
+  /**
+   * Class names added to the modal itself.
+   */
+  @argument
+  containerClassNames = null;
+
+  /**
+   * Class names added to the transparent overlay.
+   */
+  @argument
+  overlayClassNames = null;
+
+  /**
+   * Class names added to the overlay wrapper.
+   */
+  @argument
+  wrapperClassNames = null;
+  
+  /**
+   * Target that serves as the reference for modal position.
+   */
+  @argument
+  target = 'body';
+  
+  /**
+   * When true, renders the modal without use of a wormhole.
+   */
+  @argument
+  renderInPlace = false;
+
+  /**
+   * String of the form 'vert-attachment horiz-attachment' for positioning.
+   */
+  @argument
+  targetAttachment = 'middle center';
+
   // ----- Arguments: adde-modal specific -----
 
   /**
@@ -72,6 +114,13 @@ export default class AddeModal extends Component {
   @type('string')
   @argument
   headerText = '';
+
+  /**
+   * Whether to show the close button in the top right of the modal (inside the header).
+   */
+  @type('boolean')
+  @argument
+  showCloseButton = true;
 
   /**
    * Whether to show the footer, which contains the 'Confirm' and 'Cancel' buttons (if used).
@@ -84,7 +133,7 @@ export default class AddeModal extends Component {
    * Button text for the primary ('Confirm') button in the footer. The 'Confirm' button is not shown
    * if this property is null.
    */
-  @type('string')
+  @type(unionOf(null, 'string'))
   @argument
   confirmText = 'Confirm';
 
@@ -92,18 +141,29 @@ export default class AddeModal extends Component {
    * Button text for the primary ('Cancel') button in the footer. The 'Cancel' button is not shown
    * if this property is null.
    */
-  @type('string')
+  @type(unionOf(null, 'string'))
   @argument
   cancelText = 'Cancel';
 
+  /**
+   * Action sent upon clicking the 'Confirm' button.
+   */
   @type(unionOf(null, 'string'))
   @argument
   onConfirm = null;
 
+  /**
+   * Action sent upon clicking the 'Cancel' button.
+   */
   @type(unionOf(null, 'string'))
   @argument
   onCancel = null;
 
+  /**
+   * Action sent upon closing the modal, either by clicking the 'X' button in top-right, clicking
+   * the overlay (if `clickOverlayToClose` is true), or pressing the Escape key (if `escapeToClose`
+   * is true).
+   */
   @type(unionOf(null, 'string'))
   @argument
   onClose = null;
@@ -112,7 +172,7 @@ export default class AddeModal extends Component {
 
   /**
    * Action handler for when the 'Confirm' button is clicked. If there is no action defined for
-   * 'onConfirm', it will defer to the 'onClose' action.
+   * `onConfirm`, it will defer to the `onClose` action.
    */
   @action
   sendConfirm() {
@@ -125,7 +185,7 @@ export default class AddeModal extends Component {
 
   /**
    * Action handler for when the 'Cancel' button is clicked. If there is no action defined for
-   * 'onCancel', it will defer to the 'onClose' action.
+   * `onCancel`, it will defer to the `onClose` action.
    */
   @action
   sendCancel() {
@@ -137,23 +197,28 @@ export default class AddeModal extends Component {
   }
 
   /**
-   * Action handler for when the 'Close' button is clicked, or when any of the above actions occur
-   * and the corresponding action is not defined. If there is no action defined for 'onClose',
-   * nothing happens.
+   * Action handler for when the overlay backdrop is clicked. If there is no action defined for 
+   * `onClickOverlay`, it will defer to the `onClose` action. Only triggered if 
+   * `clickOverlayToClose` is true. Bubbled up from the adde-modal-container.
    */
-  @action
-  sendClose() {
-    if (typeof this.get('onClose') === 'string') {
-      this.sendAction('onClose');
-    }
-  }
-
   @action
   sendClickOverlay() {
     if (typeof this.get('onClickOverlay') === 'string') {
       this.sendAction('onClickOverlay');
     } else {
       this.send('sendClose');
+    }
+  }
+
+  /**
+   * Action handler for when the 'Close' ('X') button is clicked. Also the fallback action for
+   * clicking 'Confirm', 'Cancel', or the overlay backdrop (if enabled). If there is no action 
+   * defined for `onClose`, nothing happens. Bubbled up from the adde-modal-container.
+   */
+  @action
+  sendClose() {
+    if (typeof this.get('onClose') === 'string') {
+      this.sendAction('onClose');
     }
   }
 }

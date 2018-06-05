@@ -76,15 +76,14 @@ Property              | Purpose
 `onClose`             | Action sent to parent when the 'Close' button is clicked. This is also the fallback action if action names are not defined for `onConfirm`, `onCancel`, or `onClickOverlay`
 `showFooter`          | Whether to show the modal footer, which contains the 'Confirm' and 'Cancel' buttons (if used).
 `showCloseButton`     | Whether to show the close button in the modal header. Defaults to true.
-`closeOnEscape`       | Whether pressing the escape key should close the modal. Defaults to true.
-`clickOutsideToClose` | Indicates whether clicking outside a modal should close the modal. Defaults to true.
-`target`              | Element selector, element, or Ember View reference that serves as the reference for modal position (default: `'body'`)
-`renderInPlace`       | When true, renders the modal without wormholing, useful for including a modal in a style guide
-`attachment`          | A string of the form 'vert-attachment horiz-attachment', e.g. `'middle left'` (see "Positioning" section below)
-`targetAttachment`    | A string of the form 'vert-attachment horiz-attachment', e.g. `'middle left'` (see "Positioning" section below)
+`escapeToClose`       | Whether pressing the escape key should close the modal. Defaults to true.
+`clickOverlayToClose` | Indicates whether clicking outside a modal should close the modal. Defaults to true.
 `containerClassNames` | CSS class names to append to container divs. This is a concatenated property, so it does **not** replace the default container class (default: `'ember-modal-dialog'`. If you subclass this component, you may define this in your subclass.)
 `overlayClassNames`   | CSS class names to append to overlay divs. This is a concatenated property, so it does **not** replace the default overlay class (default: `'ember-modal-overlay'`. If you subclass this component, you may define this in your subclass.)
 `wrapperClassNames`   | CSS class names to append to wrapper divs. This is a concatenated property, so it does **not** replace the default container class (default: `'ember-modal-wrapper'`. If you subclass this component, you may define this in your subclass.)
+`target`              | Element selector, element, or Ember View reference that serves as the reference for modal position (default: `'body'`)
+`renderInPlace`       | When true, renders the modal without wormholing, useful for including a modal in a style guide
+`targetAttachment`    | A string of the form 'vert-attachment horiz-attachment', e.g. `'middle left'` (see "Positioning" section below)
 
 ## Installation
 

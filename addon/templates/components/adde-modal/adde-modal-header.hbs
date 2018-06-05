@@ -1,10 +1,10 @@
 {{#if hasBlock}}
   {{yield}}
 {{else}}
+  <h4 class='adde-modal-title'>{{headerText}}</h4>
   {{#if showCloseButton}}
     <button tabindex=0 class='button-icon adde-modal-close' {{action 'sendClose'}}>
       &times;
     </button>
   {{/if}}
-  <h4 class='adde-modal-title'>{{headerText}}</h4>
 {{/if}}

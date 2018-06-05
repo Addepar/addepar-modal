@@ -1,14 +1,21 @@
 {{#adde-modal-container
   size=size
   translucentOverlay=translucentOverlay
-  clickOutsideToClose=clickOutsideToClose
-  closeOnEscape=closeOnEscape
+  clickOverlayToClose=clickOverlayToClose
+  escapeToClose=escapeToClose
   rootElementSelector=rootElementSelector
+  containerClassNames=containerClassNames
+  overlayClassNames=overlayClassNames
+  wrapperClassNames=wrapperClassNames
+  targetAttachment=targetAttachment
+  attachment=attachment
+  renderInPlace=renderInPlace
+  target=target
   onClickOverlay='sendClickOverlay'
   onClose='sendClose'
 }}
 
-  {{adde-modal-header 
+  {{adde-modal-header
     onClose='sendClose'
     headerText=headerText
     showCloseButton=showCloseButton
@@ -26,5 +33,5 @@
       cancelText=cancelText
     }}
   {{/if}}
-  
+
 {{/adde-modal-container}}

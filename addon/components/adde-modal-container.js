@@ -34,19 +34,31 @@ export default class AddeModalContainer extends ModalDialog {
   translucentOverlay = true;
 
   /**
-   * Whether clicking the overlay should send the 'onClose' action.
+   * Whether clicking the overlay should send the `onClose` action.
    */
   @type('boolean')
   @argument
-  clickOutsideToClose = true;
+  clickOverlayToClose = true;
 
   /**
-   * Whether pressing the 'Escape' key will send the 'onClose' action.
+   * Action sent upon clicking the overlay; only sent if `clickOverlayToClose` is true
+   */
+  @type(unionOf(null, 'string'))
+  @argument
+  onClickOverlay = null;
+
+  /**
+   * Whether pressing the 'Escape' key will send the `onClose` action.
    */
   @type('boolean')
   @argument
-  closeOnEscape = true;
+  escapeToClose = true;
 
+  /**
+   * Selector string for the element that should be focused upon modal instantiation. If not
+   * specified, it will try to focus 'Confirm' button, then 'Cancel' button, then the first
+   * focusable element, in that order.
+   */
   @type(unionOf(null, 'string'))
   @immutable
   @argument
@@ -63,10 +75,15 @@ export default class AddeModalContainer extends ModalDialog {
 
   // ----- Private Variables -----
 
+  /**
+   * Root element, on which the event listener is added which sends the `onClose` action on 'Escape'
+   * keydown.
+   * @see didInsertElement
+   */
   _rootElement = null;
 
   @type('string') _modalElementSelector = '.adde-modal';
-
+  
   _modalElement = null;
 
   @type('string') _modalTitleSelector = '.adde-modal-title';
@@ -199,12 +216,13 @@ export default class AddeModalContainer extends ModalDialog {
   // ----- Actions -----
 
   /**
-   * Action handler for when the translucent overlay is clicked. If there is no action defined for
-   * 'onClickOverlay', it will defer to the 'onClose' action.
+   * Action handler for when the overlay backdrop is clicked. If there is no action defined for
+   * `onClickOverlay`, it will defer to the `onClose` action. Only triggered if 
+   * `clickOverlayToClose` is true.
    */
   @action
   sendClickOverlay() {
-    if (!this.get('clickOutsideToClose')) {
+    if (!this.get('clickOverlayToClose')) {
       return;
     }
     if (typeof this.get('onClickOverlay') === 'string') {
@@ -215,9 +233,9 @@ export default class AddeModalContainer extends ModalDialog {
   }
 
   /**
-   * Action handler for when the 'Close' button is clicked, or when any of the above actions occur
-   * and the corresponding action is not defined. If there is no action defined for 'onClose',
-   * nothing happens.
+   * Action handler for when the 'Close' ('X') button is clicked. Also the fallback action for
+   * clicking 'Confirm', 'Cancel', or the overlay backdrop (if enabled). If there is no action 
+   * defined for `onClose`, nothing happens.
    */
   @action
   sendClose() {
@@ -226,18 +244,10 @@ export default class AddeModalContainer extends ModalDialog {
     }
   }
 
-  @action
-  sendConfirm() {
-    debugger;
-    if (typeof this.get('onConfirm') === 'string') {
-      this.sendAction('onConfirm');
-    }
-  }
-
   // ----- Event Handlers -----
 
   _closeModalHandler = event => {
-    if (!this.get('closeOnEscape')) {
+    if (!this.get('escapeToClose')) {
       return;
     }
 

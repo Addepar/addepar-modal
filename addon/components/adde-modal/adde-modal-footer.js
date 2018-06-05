@@ -10,22 +10,43 @@ import { action } from '@ember-decorators/object';
 export default class AddeModalFooterComponent extends Component {
   layout = layout;
 
-  @type('string')
+  // ----- Arguments -----
+
+  /**
+   * Button text for the primary ('Confirm') button in the footer. The 'Confirm' button is not shown
+   * if this property is null.
+   */
+  @type(unionOf(null, 'string'))
   @argument
   confirmText = 'Confirm';
 
-  @type('string')
+  /**
+   * Button text for the primary ('Cancel') button in the footer. The 'Cancel' button is not shown
+   * if this property is null.
+   */
+  @type(unionOf(null, 'string'))
   @argument
   cancelText = 'Cancel';
 
+  /**
+   * Action sent upon clicking the 'Confirm' button
+   */
   @type(unionOf(null, 'string'))
   @argument
   onConfirm = null;
 
+  /**
+   * Action sent upon clicking the 'Cancel' button.
+   */
   @type(unionOf(null, 'string'))
   @argument
   onCancel = null;
 
+  // ----- Actions -----
+
+  /**
+   * Action handler for when the 'Confirm' button is clicked.
+   */
   @action
   sendConfirm() {
     if (typeof this.get('onConfirm') === 'string') {
@@ -33,6 +54,9 @@ export default class AddeModalFooterComponent extends Component {
     }
   }
 
+  /**
+   * Action handler for when the 'Cancel' button is clicked.
+   */
   @action
   sendCancel() {
     if (typeof this.get('onCancel') === 'string') {
