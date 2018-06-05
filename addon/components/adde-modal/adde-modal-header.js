@@ -34,7 +34,7 @@ export default class AddeModalHeaderComponent extends Component {
   showCloseButton = true;
 
   // ----- Actions -----
-  
+
   /**
    * Action handler for clicking the 'X' button in the top-right corner of the header..
    */

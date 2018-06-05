@@ -73,38 +73,32 @@ export default class AddeModal extends Component {
   /**
    * Class names added to the modal itself.
    */
-  @argument
-  containerClassNames = null;
+  @argument containerClassNames = null;
 
   /**
    * Class names added to the transparent overlay.
    */
-  @argument
-  overlayClassNames = null;
+  @argument overlayClassNames = null;
 
   /**
    * Class names added to the overlay wrapper.
    */
-  @argument
-  wrapperClassNames = null;
-  
+  @argument wrapperClassNames = null;
+
   /**
    * Target that serves as the reference for modal position.
    */
-  @argument
-  target = 'body';
-  
+  @argument target = 'body';
+
   /**
    * When true, renders the modal without use of a wormhole.
    */
-  @argument
-  renderInPlace = false;
+  @argument renderInPlace = false;
 
   /**
    * String of the form 'vert-attachment horiz-attachment' for positioning.
    */
-  @argument
-  targetAttachment = 'middle center';
+  @argument targetAttachment = 'middle center';
 
   // ----- Arguments: adde-modal specific -----
 
@@ -197,8 +191,8 @@ export default class AddeModal extends Component {
   }
 
   /**
-   * Action handler for when the overlay backdrop is clicked. If there is no action defined for 
-   * `onClickOverlay`, it will defer to the `onClose` action. Only triggered if 
+   * Action handler for when the overlay backdrop is clicked. If there is no action defined for
+   * `onClickOverlay`, it will defer to the `onClose` action. Only triggered if
    * `clickOverlayToClose` is true. Bubbled up from the adde-modal-container.
    */
   @action
@@ -212,7 +206,7 @@ export default class AddeModal extends Component {
 
   /**
    * Action handler for when the 'Close' ('X') button is clicked. Also the fallback action for
-   * clicking 'Confirm', 'Cancel', or the overlay backdrop (if enabled). If there is no action 
+   * clicking 'Confirm', 'Cancel', or the overlay backdrop (if enabled). If there is no action
    * defined for `onClose`, nothing happens. Bubbled up from the adde-modal-container.
    */
   @action

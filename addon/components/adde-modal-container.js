@@ -83,7 +83,7 @@ export default class AddeModalContainer extends ModalDialog {
   _rootElement = null;
 
   @type('string') _modalElementSelector = '.adde-modal';
-  
+
   _modalElement = null;
 
   @type('string') _modalTitleSelector = '.adde-modal-title';
@@ -217,7 +217,7 @@ export default class AddeModalContainer extends ModalDialog {
 
   /**
    * Action handler for when the overlay backdrop is clicked. If there is no action defined for
-   * `onClickOverlay`, it will defer to the `onClose` action. Only triggered if 
+   * `onClickOverlay`, it will defer to the `onClose` action. Only triggered if
    * `clickOverlayToClose` is true.
    */
   @action
@@ -234,7 +234,7 @@ export default class AddeModalContainer extends ModalDialog {
 
   /**
    * Action handler for when the 'Close' ('X') button is clicked. Also the fallback action for
-   * clicking 'Confirm', 'Cancel', or the overlay backdrop (if enabled). If there is no action 
+   * clicking 'Confirm', 'Cancel', or the overlay backdrop (if enabled). If there is no action
    * defined for `onClose`, nothing happens.
    */
   @action
