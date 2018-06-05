@@ -1,13 +1,32 @@
 {{#if isShowingModal}}
   {{#adde-modal
+    headerText='Test'
+    size='large'
     onClose='hideModal'
-    headerText='Test header'
-    clickOutsideToClose=false
   }}
-    This is a sample modal!
+    TEST
   {{/adde-modal}}
 {{/if}}
 
+Using built in stuff:
 <button {{action 'showModal'}}>
   Show modal
+</button>
+
+
+{{#if isShowingOtherModal}}
+  {{#adde-modal-container}}
+    {{#adde-modal-header}}
+      WHAT IS UP
+    {{/adde-modal-header}}
+    {{#adde-modal-body}}
+      THIS IS BODY
+    {{/adde-modal-body}}
+    {{adde-modal-footer}}
+  {{/adde-modal-container}}
+{{/if}}
+
+Compose our own custom modal:
+<button {{action 'showOtherModal'}}>
+  Show custom modal
 </button>

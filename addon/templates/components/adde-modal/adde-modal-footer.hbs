@@ -1,0 +1,15 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#if confirmText}}
+    <button tabindex=0 class='button-primary adde-modal-confirm' {{action 'sendConfirm'}}>
+      {{confirmText}}
+    </button>
+  {{/if}}
+
+  {{#if cancelText}}
+    <button tabindex=0 class='button-default adde-modal-cancel' {{action 'sendCancel'}}>
+      {{cancelText}}
+    </button>
+  {{/if}}
+{{/if}}

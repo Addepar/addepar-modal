@@ -1,44 +1,30 @@
-{{#ember-wormhole to=destinationElementId renderInPlace=renderInPlace}}
-  <div class='{{wrapperClassNamesString}} {{wrapper-class}}'>
-    {{#modal-dialog-overlay
-        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
-        action='onClickOverlay'
+{{#adde-modal-container
+  size=size
+  translucentOverlay=translucentOverlay
+  clickOutsideToClose=clickOutsideToClose
+  closeOnEscape=closeOnEscape
+  rootElementSelector=rootElementSelector
+  onClickOverlay='sendClickOverlay'
+  onClose='sendClose'
+}}
+
+  {{adde-modal-header 
+    onClose='sendClose'
+    headerText=headerText
+    showCloseButton=showCloseButton
+  }}
+
+  {{#adde-modal-body}}
+    {{yield}}
+  {{/adde-modal-body}}
+
+  {{#if showFooter}}
+    {{adde-modal-footer
+      onConfirm='sendConfirm'
+      onCancel='sendCancel'
+      confirmText=confirmText
+      cancelText=cancelText
     }}
-      {{#ember-modal-dialog-positioned-container 
-        classNameBindings='containerClassNamesString targetAttachmentClass container-class sizeClass'
-        classNames='adde-modal'
-        targetAttachment=targetAttachment
-        target=target
-      }}
-        <div class='adde-modal-header'>
-          {{#if showCloseButton}}
-            <button tabIndex=0 class='button-icon adde-modal-close' {{action 'onClose'}}>
-              &times;
-            </button>
-          {{/if}}
-          <h4 class='adde-modal-title'>{{headerText}}</h4>
-        </div>
-
-        <div class='adde-modal-body'>
-          {{yield}}
-        </div>
-
-        {{#if showFooter}}
-          <div class='adde-modal-footer'>
-            {{#if confirmText}}
-              <button tabIndex=0 class='button-primary adde-modal-confirm' {{action 'onConfirm'}}>
-                {{confirmText}}
-              </button>
-            {{/if}}
-
-            {{#if cancelText}}
-              <button tabIndex=0 class='button-default adde-modal-cancel' {{action 'onCancel'}}>
-                {{cancelText}}
-              </button>
-            {{/if}}
-          </div>
-        {{/if}}
-      {{/ember-modal-dialog-positioned-container}}
-    {{/modal-dialog-overlay}}
-  </div>
-{{/ember-wormhole}}
+  {{/if}}
+  
+{{/adde-modal-container}}

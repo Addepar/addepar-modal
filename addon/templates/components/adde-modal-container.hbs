@@ -1,0 +1,17 @@
+{{#ember-wormhole classNames='adde-modal-trigger' to=destinationElementId renderInPlace=renderInPlace}}
+  <div class='{{wrapperClassNamesString}} {{wrapperClass}}'>
+    {{#modal-dialog-overlay
+        classNameBindings='overlayClassNamesString translucentOverlay:translucent overlayClass'
+        action='sendClickOverlay'
+    }}
+      {{#ember-modal-dialog-positioned-container 
+        classNameBindings='containerClassNamesString targetAttachmentClass containerClass sizeClass'
+        classNames='adde-modal'
+        targetAttachment=targetAttachment
+        target=target
+      }}
+        {{yield}}
+      {{/ember-modal-dialog-positioned-container}}
+    {{/modal-dialog-overlay}}
+  </div>
+{{/ember-wormhole}}
