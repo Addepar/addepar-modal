@@ -73,17 +73,17 @@ export default class AddeModal extends Component {
   /**
    * Class names added to the modal itself.
    */
-  @argument containerClassNames = null;
+  @argument containerClassNames = [];
 
   /**
    * Class names added to the transparent overlay.
    */
-  @argument overlayClassNames = null;
+  @argument overlayClassNames = [];
 
   /**
    * Class names added to the overlay wrapper.
    */
-  @argument wrapperClassNames = null;
+  @argument wrapperClassNames = [];
 
   /**
    * Target that serves as the reference for modal position.

@@ -82,11 +82,11 @@ export default class AddeModalContainer extends ModalDialog {
    */
   _rootElement = null;
 
-  @type('string') _modalElementSelector = '.adde-modal';
+  _modalElementSelector = '.adde-modal';
 
   _modalElement = null;
 
-  @type('string') _modalTitleSelector = '.adde-modal-title';
+  _modalTitleSelector = '.adde-modal-title';
 
   /**
    * CSS class generated from `size` to alter the width of the modal. The default sizes are:
@@ -110,8 +110,6 @@ export default class AddeModalContainer extends ModalDialog {
   // ----- Lifecycle Hooks -----
 
   didInsertElement() {
-    this._super(...arguments);
-
     // Setup event listeners for keyboard support
     let rootElementSelector = this.get('rootElementSelector');
     let possibleRootElements = self.document.querySelectorAll(rootElementSelector);
@@ -151,7 +149,6 @@ export default class AddeModalContainer extends ModalDialog {
   }
 
   willDestroyElement() {
-    this._super(...arguments);
     this._rootElement.removeEventListener('keydown', this._closeModalHandler);
   }
 
