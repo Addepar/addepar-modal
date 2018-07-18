@@ -22,6 +22,7 @@
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-decorators": "^2.1.0",
+    "ember-legacy-class-shim": "^1.0.5",
     "ember-modal-dialog": "1.0.0"
   },
   "devDependencies": {
