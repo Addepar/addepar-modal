@@ -1,3 +1,41 @@
-<h2 id="title">Welcome to Ember</h2>
+<section>
+  <h3>Sample base \{{adde-modal}}</h3>  
+  {{#if isShowingModal}}
+    {{#adde-modal
+      headerText='Test'
+      size='large'
+      onClose='hideModal'
+      onCancel='hideModal'
+      onClickOverlay='hideModal'
+      containerClassNames='container'
+      overlayClassNames='overlay'
+      wrapperClassNames='wrapper'
+    }}
+      TEST
+    {{/adde-modal}}
+  {{/if}}
+  <button {{action 'showModal'}}>
+    Click me
+  </button>
+</section>
 
-{{outlet}}
+
+
+{{#if isShowingOtherModal}}
+  {{#adde-modal-container
+    onClose='hideOtherModal'
+  }}
+    {{#adde-modal-header}}
+      WHAT IS UP
+    {{/adde-modal-header}}
+    {{#adde-modal-body}}
+      THIS IS BODY
+    {{/adde-modal-body}}
+    {{adde-modal-footer}}
+  {{/adde-modal-container}}
+{{/if}}
+
+Compose our own custom modal:
+<button {{action 'showOtherModal'}}>
+  Show custom modal
+</button>

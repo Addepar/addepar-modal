@@ -1,0 +1,37 @@
+{{#adde-modal-container
+  size=size
+  translucentOverlay=translucentOverlay
+  clickOverlayToClose=clickOverlayToClose
+  escapeToClose=escapeToClose
+  rootElementSelector=rootElementSelector
+  containerClassNames=containerClassNames
+  overlayClassNames=overlayClassNames
+  wrapperClassNames=wrapperClassNames
+  targetAttachment=targetAttachment
+  attachment=attachment
+  renderInPlace=renderInPlace
+  target=target
+  onClickOverlay='sendClickOverlay'
+  onClose='sendClose'
+}}
+
+  {{adde-modal-header
+    onClose='sendClose'
+    headerText=headerText
+    showCloseButton=showCloseButton
+  }}
+
+  {{#adde-modal-body}}
+    {{yield}}
+  {{/adde-modal-body}}
+
+  {{#if showFooter}}
+    {{adde-modal-footer
+      onConfirm='sendConfirm'
+      onCancel='sendCancel'
+      confirmText=confirmText
+      cancelText=cancelText
+    }}
+  {{/if}}
+
+{{/adde-modal-container}}
